@@ -1,4 +1,5 @@
 /* Reset default styles */
+/* Reset default styles */
 * {
   margin: 0;
   padding: 0;
@@ -139,10 +140,10 @@ h1 {
 
 /* Dialog styling */
 #stats-dialog {
-  position: fixed; /* Ensure it stays centered */
+  position: fixed;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%); /* Center horizontally and vertically */
+  transform: translate(-50%, -50%);
   padding: 2rem;
   border-radius: 15px;
   border: none;
@@ -151,12 +152,11 @@ h1 {
   width: 90%;
   max-width: 450px;
   animation: slideIn 0.3s ease;
-  backdrop-filter: blur(5px); /* Subtle blur effect */
+  backdrop-filter: blur(5px);
 }
 
-/* Dialog backdrop */
 #stats-dialog::backdrop {
-  background: rgba(0, 0, 0, 0.5); /* Dark overlay for contrast */
+  background: rgba(0, 0, 0, 0.5);
 }
 
 #stats-dialog h2 {
@@ -172,16 +172,18 @@ h1 {
   font-size: 1.2rem;
   color: #34495e;
   margin-bottom: 1rem;
-  display: flex;
-  justify-content: space-between;
   padding: 0.5rem 1rem;
   background: #f7f9fc;
   border-radius: 8px;
+  display: flex;
+  align-items: center;
+  gap: 1rem; /* Reduced space between label and value */
 }
 
 #stats-dialog span {
   font-weight: bold;
   color: #e74c3c;
+  margin-left: auto; /* Pushes value to the right slightly */
 }
 
 #try-again-btn {
