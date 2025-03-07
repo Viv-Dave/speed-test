@@ -51,6 +51,9 @@ h1 {
   line-height: 1.6;
   border: 2px solid #dfe6e9;
   transition: border-color 0.3s ease;
+  user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 
 #test-paragraph:hover {
@@ -132,4 +135,88 @@ h1 {
 #results span {
   font-weight: bold;
   color: #e74c3c;
+}
+
+/* Dialog styling */
+#stats-dialog {
+  position: fixed; /* Ensure it stays centered */
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%); /* Center horizontally and vertically */
+  padding: 2rem;
+  border-radius: 15px;
+  border: none;
+  background: #ffffff;
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+  width: 90%;
+  max-width: 450px;
+  animation: slideIn 0.3s ease;
+  backdrop-filter: blur(5px); /* Subtle blur effect */
+}
+
+/* Dialog backdrop */
+#stats-dialog::backdrop {
+  background: rgba(0, 0, 0, 0.5); /* Dark overlay for contrast */
+}
+
+#stats-dialog h2 {
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+#stats-dialog p {
+  font-size: 1.2rem;
+  color: #34495e;
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  background: #f7f9fc;
+  border-radius: 8px;
+}
+
+#stats-dialog span {
+  font-weight: bold;
+  color: #e74c3c;
+}
+
+#try-again-btn {
+  display: block;
+  width: 150px;
+  margin: 1.5rem auto 0;
+  padding: 0.8rem 1rem;
+  font-size: 1.1rem;
+  background: #2ecc71;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#try-again-btn:hover {
+  background: #27ae60;
+  transform: scale(1.05);
+}
+
+#try-again-btn:active {
+  transform: scale(0.95);
+}
+
+/* Slide-in animation for dialog */
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -60%);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%);
+  }
 }

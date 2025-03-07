@@ -1,4 +1,5 @@
 // Multiple sample word arrays for variety
+// Multiple sample word arrays for variety
 const sampleWords1 = [
   "the",
   "quick",
@@ -127,6 +128,12 @@ const timerDisplay = document.getElementById("timer");
 const wpmDisplay = document.getElementById("wpm");
 const accuracyDisplay = document.getElementById("accuracy");
 const mistakesDisplay = document.getElementById("mistakes");
+const statsDialog = document.getElementById("stats-dialog");
+const dialogTimer = document.getElementById("dialog-timer");
+const dialogWpm = document.getElementById("dialog-wpm");
+const dialogAccuracy = document.getElementById("dialog-accuracy");
+const dialogMistakes = document.getElementById("dialog-mistakes");
+const tryAgainBtn = document.getElementById("try-again-btn");
 
 // State variables
 let startTime = null;
@@ -135,11 +142,8 @@ let generatedText = "";
 
 // Generate a random paragraph from a randomly selected word set
 function generateRandomParagraph(wordCount = 20) {
-  // Randomly pick one of the sample word arrays
   const randomSetIndex = Math.floor(Math.random() * allSampleWords.length);
   const selectedWords = allSampleWords[randomSetIndex];
-
-  // Shuffle the selected array
   const shuffledWords = [...selectedWords].sort(() => Math.random() - 0.5);
   return shuffledWords.slice(0, wordCount).join(" ");
 }
@@ -161,7 +165,11 @@ function calculateResults() {
     totalCharsTyped > 0
       ? Math.round((totalCharsCorrect / totalCharsTyped) * 100)
       : 0;
-  return { elapsedTime, wpm, accuracy, typedWords, correctText };
+  let mistakes = 0;
+  for (let i = 0; i < typedWords.length; i++) {
+    if (typedWords[i] !== correctText[i]) mistakes++;
+  }
+  return { elapsedTime, wpm, accuracy, mistakes };
 }
 
 // Update display during typing (no mistakes yet)
@@ -173,23 +181,28 @@ function updateTypingDisplay() {
   mistakesDisplay.textContent = "-";
 }
 
-// Update display after submission (show mistakes and reset for next attempt)
-function updateFinalDisplay() {
-  const { elapsedTime, wpm, accuracy, typedWords, correctText } =
-    calculateResults();
-  let mistakes = 0;
-  for (let i = 0; i < typedWords.length; i++) {
-    if (typedWords[i] !== correctText[i]) mistakes++;
-  }
-  timerDisplay.textContent = 0;
+// Show final stats in dialog
+function showStatsDialog() {
+  // Calculate results before resetting the timer
+  const { elapsedTime, wpm, accuracy, mistakes } = calculateResults();
+
+  // Stop the timer
+  if (timerInterval) clearInterval(timerInterval);
+  startTime = null;
+
+  // Update main display
+  timerDisplay.textContent = Math.round(elapsedTime);
   wpmDisplay.textContent = wpm;
   accuracyDisplay.textContent = `${accuracy}%`;
   mistakesDisplay.textContent = mistakes;
 
-  // Prepare for next attempt by generating new text
-  generatedText = generateRandomParagraph();
-  testParagraph.textContent = generatedText;
-  inputArea.value = "";
+  // Update dialog with the same values
+  dialogTimer.textContent = Math.round(elapsedTime);
+  dialogWpm.textContent = wpm;
+  dialogAccuracy.textContent = accuracy;
+  dialogMistakes.textContent = mistakes;
+
+  statsDialog.showModal(); // Show the dialog
 }
 
 // Start the timer
@@ -200,7 +213,7 @@ function startTimer() {
   }
 }
 
-// Reset the test (initial load or manual reset)
+// Reset the test
 function resetTest() {
   if (timerInterval) clearInterval(timerInterval);
   startTime = null;
@@ -221,22 +234,21 @@ inputArea.addEventListener("input", () => {
 });
 
 submitBtn.addEventListener("click", () => {
-  if (timerInterval) clearInterval(timerInterval);
-  startTime = null;
-  updateFinalDisplay(); // Submits current test and sets up next one
+  if (startTime) {
+    // Only proceed if test has started
+    showStatsDialog();
+  }
+});
+
+tryAgainBtn.addEventListener("click", () => {
+  statsDialog.close(); // Close the dialog
+  resetTest(); // Reset for a new attempt
 });
 
 // Initialize the test on page load
-document.addEventListener("DOMContentLoaded", resetTest);
-
-// --- Additions to prevent copying ---
-
-// CSS to disable text selection on the paragraph
-testParagraph.style.userSelect = "none"; // Standard CSS property
-testParagraph.style.webkitUserSelect = "none"; // For Safari
-testParagraph.style.msUserSelect = "none"; // For IE and Edge
-
-// JavaScript to disable context menu on the paragraph
-testParagraph.addEventListener("contextmenu", (event) => {
-  event.preventDefault(); // Prevent default context menu
+document.addEventListener("DOMContentLoaded", () => {
+  resetTest();
+  testParagraph.addEventListener("contextmenu", (event) =>
+    event.preventDefault()
+  );
 });
