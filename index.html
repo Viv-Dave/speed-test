@@ -2,35 +2,22 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Speed Test</title>
+    <title>Typing Speed Test</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <h1>Speed Test</h1>
-    <div class="speedometer">
-      <div class="timer">0</div>
+    <div class="container">
+      <h1>Typing Speed Test</h1>
+      <div id="test-paragraph"></div>
+      <textarea id="input-area" placeholder="Start typing here..."></textarea>
+      <button id="submit-btn">Submit</button>
+      <div id="results">
+        <p>Time: <span id="timer">0</span>s</p>
+        <p>WPM: <span id="wpm">0</span></p>
+        <p>Accuracy: <span id="accuracy">0%</span></p>
+        <p>Mistakes: <span id="mistakes">-</span></p>
       </div>
-      <button class="start" id="start">Start</button>
     </div>
-    <div>
-    <div class="display">
-        <div class="text">Text here</div>
-    </div>
-    <div>
-        <div class="form">
-            <form action="#">Enter Text here
-                <textarea name="textarea" id="textarea"></textarea>
-            </form>
-        </div>
-    </div>
-    </div>
-    <div class="score">
-        <div class="correct">Correct: 0</div>
-        <div class="incorrect">Incorrect: 0</div>
-        <div class="accuracy">Accuracy: 0%</div>
-        <div class="wpm">WPM: 0</div>
-    </div>
+    <script src="script.js"></script>
   </body>
-  <script src="script.js"></script>
 </html>

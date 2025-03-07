@@ -1,0 +1,135 @@
+/* Reset default styles */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  background: linear-gradient(135deg, #e0eafc, #cfdef3);
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Container styling */
+.container {
+  max-width: 900px;
+  width: 90%;
+  background: #ffffff;
+  padding: 2rem;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.container:hover {
+  transform: translateY(-5px);
+}
+
+/* Heading */
+h1 {
+  text-align: center;
+  color: #2c3e50;
+  margin-bottom: 1.5rem;
+  font-size: 2.5rem;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+}
+
+/* Test paragraph */
+#test-paragraph {
+  background: #f7f9fc;
+  padding: 1.5rem;
+  border-radius: 10px;
+  margin-bottom: 1.5rem;
+  font-size: 1.2rem;
+  color: #34495e;
+  line-height: 1.6;
+  border: 2px solid #dfe6e9;
+  transition: border-color 0.3s ease;
+}
+
+#test-paragraph:hover {
+  border-color: #3498db;
+}
+
+/* Textarea */
+#input-area {
+  width: 100%;
+  height: 120px;
+  padding: 1rem;
+  font-size: 1.1rem;
+  border: 2px solid #dfe6e9;
+  border-radius: 10px;
+  resize: none;
+  margin-bottom: 1.5rem;
+  background: #fff;
+  color: #2c3e50;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+#input-area:focus {
+  border-color: #3498db;
+  box-shadow: 0 0 10px rgba(52, 152, 219, 0.3);
+  outline: none;
+}
+
+#input-area::placeholder {
+  color: #95a5a6;
+}
+
+/* Submit button */
+#submit-btn {
+  display: block;
+  width: 200px;
+  margin: 0 auto 1.5rem;
+  padding: 0.8rem 1.5rem;
+  font-size: 1.1rem;
+  background: #3498db;
+  color: #fff;
+  border: none;
+  border-radius: 25px;
+  cursor: pointer;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+#submit-btn:hover {
+  background: #2980b9;
+  transform: scale(1.05);
+}
+
+#submit-btn:active {
+  transform: scale(0.95);
+}
+
+/* Results section */
+#results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 1rem;
+  font-size: 1.2rem;
+  color: #2c3e50;
+}
+
+#results p {
+  background: #ecf0f1;
+  padding: 1rem;
+  border-radius: 8px;
+  text-align: center;
+  transition: background 0.3s ease;
+}
+
+#results p:hover {
+  background: #dfe6e9;
+}
+
+#results span {
+  font-weight: bold;
+  color: #e74c3c;
+}
